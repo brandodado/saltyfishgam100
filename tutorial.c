@@ -97,7 +97,7 @@ static void DrawKeyWithTriangle(float x_center, float y_center, float size, cons
 void Tutorial_Init(void)
 {
     // Load the font for this state
-    tutorial_font = CP_Font_Load("Assets/Roboto-Regular.ttf");
+    tutorial_font = CP_Font_Load("Assets/Exo2-Regular.ttf");
     CP_Font_Set(tutorial_font);
 
     tutorialPage = 1; // Always start on page 1

@@ -34,7 +34,7 @@ int animate_index;
 float max_bar_width;
 
 #define MAX_HAND_SIZE 7      
-#define MAX_DECK_SIZE 40 
+// #define MAX_DECK_SIZE 40 // <-- FIX 1: Removed this line
 
 Card hand[MAX_HAND_SIZE];
 Card draw_pile[MAX_DECK_SIZE];
@@ -68,7 +68,7 @@ static CP_Image game_bg = NULL;
 int level_num = 1;
 
 float miss_timer = 0.0f;
-float miss_x = 0.0f;     
+float miss_x = 0.0f;
 float miss_y = 0.0f;
 
 typedef enum {
@@ -321,6 +321,13 @@ static void DrawHUD(float ww, float wh) {
 }
 
 void UpdateEnemyTurn(void) {
+    // --- FIX 2: Add NULL check to prevent crash ---
+    if (!current_enemies) {
+        current_phase = PHASE_PLAYER;
+        return;
+    }
+    // --- End Fix 2 ---
+
     float dt = CP_System_GetDt();
     enemy_turn_timer += dt;
 
@@ -374,7 +381,7 @@ void UpdateEnemyTurn(void) {
 void Game_Init(void)
 {
     game_bg = CP_Image_Load("Assets/background.jpg");
-    game_font = CP_Font_Load("Assets/Roboto-Regular.ttf");
+    game_font = CP_Font_Load("Exo2-Regular.ttf");
     if (game_font != 0) { CP_Font_Set(game_font); CP_Settings_TextSize(24); }
 
     deck_pos = CP_Vector_Set(50, 600);
@@ -404,8 +411,12 @@ void Game_Update(void) {
     CP_Graphics_ClearBackground(CP_Color_Create(20, 25, 28, 255));
     float ww = (float)CP_System_GetWindowWidth();
     float wh = (float)CP_System_GetWindowHeight();
-    float mx = CP_Input_GetMouseX();
-    float my = CP_Input_GetMouseY();
+
+    // --- FIX 3: Add (float) casts ---
+    float mx = (float)CP_Input_GetMouseX();
+    float my = (float)CP_Input_GetMouseY();
+    // --- End Fix 3 ---
+
     int mouse_clicked = CP_Input_MouseClicked();
 
     if (game_bg) CP_Image_Draw(game_bg, ww * 0.5f, wh * 0.5f, ww, wh, 255);
@@ -599,5 +610,6 @@ void Game_Update(void) {
 
 void Game_Exit(void)
 {
-    CP_Image_Free(&game_bg);
+    // --- FIX 4: Removed the '&' ---
+    CP_Image_Free(game_bg);
 }

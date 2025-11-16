@@ -23,7 +23,7 @@ void InitReward(RewardState* reward_state) {
 
     // Load font 
     if (!font_loaded) {
-        reward_font = CP_Font_Load("Assets/Roboto.ttf");
+        reward_font = CP_Font_Load("Assets/Exo2-Regular.ttf");
         font_loaded = true;
     }
 }

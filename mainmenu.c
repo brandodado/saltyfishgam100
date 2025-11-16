@@ -17,7 +17,7 @@ static CP_Font menu_font;
 
 void Main_Menu_Init(void)
 {
-    menu_font = CP_Font_Load("Assets/Roboto-Regular.ttf");
+    menu_font = CP_Font_Load("Assets/Exo2-Regular.ttf");
     CP_Font_Set(menu_font);
     CP_Settings_TextSize(32);
 

@@ -4,21 +4,22 @@
 #ifndef _level_H
 #define _level_H
 
-    // ---------------- Enemy struct ----------------
-    typedef struct {
-        const char* name;  
-        int health;
-        int max_health;
-        int attack;
-        int defense;
-        bool alive;
-    } Enemy;
+// ---------------- Enemy struct ----------------
+typedef struct {
+    const char* name;
+    int health;
+    int max_health;
+    int attack;
+    int defense;
+    bool alive;
+    float dot_timing; // <-- FIX: Added missing member
+} Enemy;
 
-    // ---------------- Level 1 ----------------
-    extern Enemy level1_enemies[];
-    extern int level1_enemy_count;
+// ---------------- Level 1 ----------------
+extern Enemy level1_enemies[];
+extern int level1_enemy_count;
 
-    // ---------------- Level 2 ----------------
-    extern Enemy level2_enemies[];
-    extern int level2_enemy_count;
+// ---------------- Level 2 ----------------
+extern Enemy level2_enemies[];
+extern int level2_enemy_count;
 #endif
